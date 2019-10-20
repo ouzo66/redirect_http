@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
+
+	"google.golang.org/appengine"
 )
 
 func redirect(w http.ResponseWriter, req *http.Request) {
@@ -16,5 +18,6 @@ func redirect(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	log.Fatal(http.ListenAndServe(":80", http.HandlerFunc(redirect)))
+	http.HandleFunc("/", redirect)
+	appengine.Main()
 }
